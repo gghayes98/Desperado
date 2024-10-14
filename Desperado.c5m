@@ -1,0 +1,2731 @@
+##### CUSTOM TERRAIN NUMBERS USED: 562 to 577 #####
+##### CUSTOM TERRAIN GROUP USED: -1112 #####
+
+# ---------- The required mod info ---------------
+
+icon                "desperado_banner.tga"
+description         "This mod adds the custom Desperado class"
+
+# ---------- Sounds ----------
+
+sample 189 "./sounds/desperado_level.sw2"
+
+# ---------- New Terrain ---------------
+
+selectterr      562 Train Station
+name            "Train Station"
+spr             "./sprites/station.tga"
+ownable
+trade           2
+apcost          1
+tempimmune
+
+selectterr      563 # Saloon
+name            "Saloon"
+spr             "./sprites/saloon.tga"
+gold            1
+iron            1
+citadel
+batmap 38
+ownable
+settlement
+desertok
+cityname
+woodengate
+walls
+apcost          1
+tempimmune
+
+selectterr      564 # Hotel
+name            "Hotel"
+spr             "./sprites/hotel.tga"
+gold            5
+ownable
+town1
+batmap 40
+apcost          1
+snowok
+tempimmune
+
+# selectterr      565 Sheriff's Office/Jail
+
+selectterr      567 # General Store
+name            "General Store"
+spr             "./sprites/store.tga"
+trade           1
+herbs           8
+fungus          4
+weed            2
+hands           1
+gems            2^12
+ownable
+batmap 40
+apcost          1
+tempimmune
+
+selectterr      568 # Blacksmith
+name            "Blacksmith"
+spr             "./sprites/blacksmith.tga"
+iron            4
+ownable
+batmap 40
+apcost          1
+tempimmune
+
+selectterr      569 # Bank
+name            "Bank"
+spr             "./sprites/bank.tga"
+gold            3
+irongate
+walls
+ownable
+goldboost
+#useable         # Rob the bank & Restock the bank (steal 100, reinstate for 150?)
+batmap 13
+apcost          1
+tempimmune
+
+selectterr      570 # Chapel
+name            "Chapel"
+spr             "./sprites/chapel.tga"
+gold            1
+citadel
+temple
+ownable
+batmap 40
+nostdrec
+apcost          1
+tempimmune
+
+selectterr      571
+name            "Ranch"
+spr             "./sprites/ranch.tga"
+gold            2
+pop             4
+woodengate
+ownable
+rare
+settlement
+harvest
+batmap 40
+apcost          1
+tempimmune
+
+selectterr      572 # Town Hall
+name            "Town Hall"
+spr             "./sprites/town_hall.tga"
+woodencitadel
+ownable
+library1
+ritrebate       10
+batmap 40
+apcost          1
+tempimmune
+
+selectterr      573 # Electric Mine
+name            "Electric Mine"
+spr             "./sprites/electric_mine.tga" #FIXME sprite needs to be centered?
+citadel
+nostdrec
+mine
+ownable
+iron            5
+gold            4
+apcost          2
+
+selectterr      574 # Railroad
+name            "Railroad"
+spr             "./sprites/railroad.tga"
+visible
+burnable
+apcost          1
+tempimmune
+
+selectterr      575 # Lumber Yard
+name            "Lumber Yard"
+spr             "./sprites/lumber.tga"
+ownable
+apcost			1
+
+selectterr      576 # Explorer's Guild
+name            "Explorer's Guild"
+spr             "./sprites/guild.tga"
+ownable
+apcost			1
+tempimmune
+
+selectterr      577 # Star Fort
+name            "Star Fort"
+spr             "./sprites/star_fort.tga"
+citadel
+batmap 			5
+walls
+irongate
+nostdrec
+ownable
+farsight
+tempimmune
+apcost			1
+
+selectterrgroup -1112
+setname "Railroads"
+addterr         574 # Railroad track
+addterr         562
+addterr         563
+addterr         564
+addterr         567
+addterr         568
+addterr         569
+addterr         570
+addterr         571
+addterr         572
+addterr         575
+addterr         576
+addterr         577
+addallsettlements
+invert
+
+# ---------- New Rituals ---------------
+
+newritpow # Mayor rituals
+
+newritual       "Study City Planning"
+descr "This ritual grants the caster a new first level ritual."
+soundfx         189
+level                  1
+cost		    0 30
+cost		    1 5
+newrit                 1 # Caster will learn a new ritual of level 1.
+free
+
+newritual       "Aquire Executive Charter"
+descr "This ritual grants the caster a new second level ritual."
+soundfx         189
+level           1
+cost		    0 100
+cost		    1 15
+newrit          2
+levelup         2
+free
+
+newritual       "Instate Town Sheriff"
+descr "In the untamed west, no town is safe without a sheriff. If there is none, the Mayor can instate a new one to protect the town."
+level           1
+cost		 	0 30
+cost		 	1 5
+promotion       1
+addstring       "Deputy"
+addstring       "Sheriff"
+free
+
+newritual       "Build Saloon"
+descr "Every town starts around a saloon, believe us. Build a new one with this ritual to start a new town. Must not be within 7 tiles of another Saloon tile."
+level           1
+cost            0 100
+cost            1 30
+apcost          2
+nonearby7req    563
+alterloc        563
+terr            -71
+soundfx 		57
+
+newritual       "Build Hotel"
+descr "Build a hotel for those who visit the town. It will provide some nice income and even more during the holiday season! Must be next to a Saloon and not within 3 tiles of another Hotel tile."
+level           1
+cost            0 75
+cost            1 10
+apcost          2
+nonearby3req    564
+nearby1req      563
+alterloc        564
+terr            -71
+soundfx 		57
+
+newritual       "Build General Store"
+descr "The general store is a staple of any town. It will provide access to all sorts of resources for very reasonable prices. Must be next to a Saloon and not within 3 tiles of another General Store tile."
+level           1
+cost            0 75
+cost            1 10
+apcost          2
+nonearby3req    567
+nearby1req      563
+terr            -71
+alterloc        567
+soundfx 		57
+
+newritual       "Build Blacksmith"
+descr "Whether you need a new gun or some horseshoes, the blacksmith will be a useful source of iron items. Must be next to a Saloon and not within 3 tiles of another Blacksmith tile."
+level           1
+cost            0 60
+cost            1 25
+apcost          2
+nonearby3req    568
+nearby1req      563
+terr            -71
+alterloc        568
+soundfx 		57
+
+newritual       "Build Bank"
+descr "More money is always nice, so invest in a bank for the town! Must be next to a Saloon and not within 3 tiles of another Bank tile."
+level           1
+cost            0 75
+cost            1 20
+apcost          2
+nonearby3req    569
+nearby1req      563
+terr            -71
+alterloc        569
+soundfx 		57
+
+newritual       "Build Chapel"
+descr "Since our destiny has been manifest from on high, we probably should build a chapel to worship. Who knows, maybe a preacher can gain spiritual enlightenment here. Must be next to a Saloon and not within 3 tiles of another Chapel tile."
+level           1
+cost            0 80
+cost            1 5
+apcost          2
+nonearby3req    570
+nearby1req      563
+terr            -71
+alterloc        570
+soundfx 		57
+
+newritual       "Build Town Hall"
+descr "Help to organize the bureaucratic mess of managing the town. This'll help cheapen rituals and educate the bureaucrats. Must be next to a Saloon and not within 3 tiles of another Town Hall tile."
+level           1
+cost            0 70
+cost            1 10
+apcost          2
+nonearby3req    572
+nearby1req      563
+terr            -71
+alterloc        572
+soundfx 		57
+
+newritual       "Build Explorer's Guild"
+descr "Campfire stories are told around every campfire out in the west, but how many of them are truly just stories? Like minded explorers will often gather at the explorers guild to organize expiditions to find out. Must be next to a Saloon and not within 3 tiles of another Explorer's Guild tile."
+level           2
+cost            0 200
+cost            1 25
+apcost          2
+nonearby3req    576
+nearby1req      563
+terr            -71
+alterloc        576
+soundfx 		57
+free
+
+newritual       "Build Train Station"
+descr "Every train must start at a train station. Must be next to a Saloon and not within 3 tiles of another Train Station tile."
+level           2
+cost            0 150
+cost            1 50
+apcost          2
+nonearby3req    562
+nearby1req      563
+terr            -71
+#makeportal      999
+soundfx 		57
+alterloc        562
+
+newritual       "Fund an Expedition"
+descr "Send out explorers to find some legendary figures and mysterious creatures back in the West."
+level           2
+terr            576
+cost            0 125
+cost 		   16 4 #expendable units
+summoning
+addstring	    "2*Si-Te-Cah"
+addstring	    "c*Heroine of the Plains"
+addstring	    "c*Steel-Driving Man"
+addstring	    "c*King of the Wild Frontier"
+apcost          0 # Actual AP cost: 1.
+
+newritual       "Fund a Great Expedition"
+descr "There are even greater legends out there. Though, you may need to send out a lot more explorers to find them."
+level           2
+terr            576
+cost            0 350
+cost 		   16 12 #expendable units
+summoning
+addstring	    "2d4*Si-Te-Cah"
+addstring	    "c*Red Ghost"
+addstring	    "c*Champion Markswoman & 4d4*Lady Sharpshooter"
+addstring	    "c*Giant Lumberjack & 1*Blue Ox"
+addstring	    "c*Greatest of All Cowboys"
+apcost          0 # Actual AP cost: 1.
+
+newritpow # Preacher Rituals
+
+#newritual     "Deliver Sermon"
+#descr "The preacher gives a powerful sermon to bless the congregation."
+#level         1
+#cost          0 1
+#gainbless 100 #FIXME
+#free
+
+newritual     "Trial of Faith"
+descr "Eventually, the preacher must begin to look even further, past the great beyond. Will they find divinity? Or malevolence? No matter what they find, they will be born again as something greater."
+level         	1
+cost          	0 140
+terr    	  	570
+summoning
+addstring	    "c*Hellfire Preacher"
+addstring	    "c*Divine Preacher"
+killtarg	   9999
+free
+forgetcurrit
+
+newritpow # Sheriff Rituals
+
+newritual       "Basic Education"
+descr "The school of hard knocks can educate anyone, anywhere as long as some blood, sweat, and tears and applied."
+soundfx         189
+level                  1
+cost		    0 25
+newrit                 1 # Caster will learn a new ritual of level 1.
+#soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+free                     # Always start with this ritual in addition to the others.
+
+newritual       "Higher Education"
+descr "As influence expands in Elysium, law enforcement will need to become more official to help maintain this growing territory."
+gainrit         5
+soundfx         189
+level           1
+cost            0 75
+cost            1 10
+newrit          2
+levelup         2
+free
+
+newritual       "Government Training"
+descr "Destiny has been manifest enough for the government to finally take direct action in Elysium, but first, law enforcement needs the proper education."
+soundfx         189
+level           2
+cost            0 150
+cost            1 25
+newrit          3
+levelup         3
+free
+
+newritual       "Train Hounds"
+descr "Train a pack of dogs to assist in big game hunting. Or people hunting. Either works."
+level           1
+cost            0 30
+addstring       "3d3*War Dog"
+summoning
+
+newritual       "Draw from the Ranch"
+descr "In times of emergency, you may need to gather as many disposable animals from the local ranches as can be found. Must be within 1 tile of a Ranch tile."
+level           1
+cost            0 55
+nearby1req      571
+addstring       "1d2*Bull & 2d4*Goat & 2d4*Donkey & 4d6*Rabbit"
+summoning
+
+newritual       "Gather Posse"
+descr "Whether hunting down criminals or just your enemies, sometimes you gotta rely on the local drunks and gunslingers."
+level           1
+cost		 	0 70
+cost		 	1 10
+apcost          2
+addstring       "4*Cowboy & 1*Gambler & 2*Gunslinger"
+addstring       "4*Cowboy & 2*Gambler & 1*Gunslinger"
+addstring       "4*Cowboy & 2*Gambler & 2*Gunslinger"
+summoning
+
+newritual       "Gold Rush"
+descr "There's gold in them hills! A prospector and some miners will surely show up to unearth such treasures."
+level           1
+cost            0 60
+cost            1 10
+terr            -4
+apcost          2
+addstring       "2d6*Miner & c*Prospector"
+summoning
+
+newritual       "Start a Lumber Yard"
+descr "Wood can be just as valuable as any other resource for building, might as well set up a lumber yard to gather some wood. Maybe the lumberjacks will be willing to join the army in their freetime. Must not be within 7 tiles of another Lumber Yard tile."
+level           2
+cost            0 50
+cost            1 10
+apcost          2
+terr            -6
+nonearby7req    575
+alterloc        575
+soundfx 		57
+summoning
+addstring	    "1*Lumber Yard Foreman"
+
+newritual       "Lay Track"
+descr "Trains need tracks to travel. Lay them down and unleash the war horses upon your enemies. Must be within 1 tile of a settlement, town tile, or another track."
+level           2
+cost            0 10
+cost            1 10
+terr            -71
+alterloc        574
+nearby1req		-1112
+soundfx 		57
+
+newritual       "Form Camel Corps"
+descr "Hopefully the Camel Corps will be more useful here than they were back at home. Only one way to find out!"
+level           2
+cost            0 100
+cost            1 15
+addstring       "c*Camel Corps Commander & 8*Camel Corps"
+summoning
+
+newritual       "Homestead Act"
+descr "Manifest Destiny extends even to Elysium! Let the settlers know and they'll flood the plains with their ranches."
+level           2
+cost            0 100
+cost            1 25
+soundfx 		57
+apcost          11
+maxcast         3
+randterrloc     0
+alterloc        571
+scryloc         10
+randterrloc     0
+alterloc        571
+scryloc         10
+randterrloc     0
+alterloc        571
+scryloc         10
+randterrloc     0
+alterloc        571
+scryloc         10
+randterrloc     0
+alterloc        571
+scryloc         10
+randterrloc     0
+alterloc        571
+scryloc         10
+randterrloc     0
+alterloc        571
+scryloc         10
+randterrloc     0
+alterloc        571
+scryloc         10
+randterrloc     0
+alterloc        571
+scryloc         10
+randterrloc     0
+alterloc        571
+scryloc         10
+randterrloc     0
+alterloc        571
+scryloc         10
+randterrloc     0
+alterloc        571
+scryloc         10
+
+newritual       "Manifest Destiny"
+descr "Elysium is just as untamed as the West back home. Our destiny will be manifest even here...by force!"
+level           3
+cost            0 175
+cost            1 25
+apcost          5
+summoning
+addstring       "1d6*Cowboy & 1d6*Gambler & 1d6*Gunslinger & 1*Sniper"
+addstring       "2d6*Cowboy & 1d6*Gambler & 1d6*Gunslinger"
+addstring       "2d6*Cowboy & 1d6*Gambler & 1d6*Gunslinger & 1*Gatling Gun"
+addstring       "1d6*Cowboy & 2d6*Gambler & 1d6*Gunslinger"
+addstring       "1d6*Cowboy & 1d6*Gambler & 2d6*Gunslinger"
+addstring       "2d6*Cowboy & 2d6*Gambler & 2d6*Gunslinger"
+
+newritual       "Construct Gatling Guns"
+descr "Richard Gatling just invented this fancy machine. It spits lead faster than anything made so far, get one while you can!"
+level           3
+cost            0 75
+cost            1 25
+terr            -95
+apcost          2
+addstring       "2*Gatling Gun"
+summoning
+
+newritual       "Construct Cannons"
+descr "Something this powerful will never go out of style."
+level           3
+cost            0 75
+cost            1 50
+terr            -95
+apcost          2
+addstring       "2*Cannon"
+summoning
+
+newritual       "Request an Armored Train"
+descr "Such an armored beast is almost unstoppable, so long as you have the rail network to use it."
+level           3
+cost            0 300
+cost            1 200
+terr            562
+apcost          5
+addstring       "c*Train Engine & 1*Train Passenger Car & 1*Train Gunner & 1*Train Cannon & 1*Train Cargo & 1*Train Caboose"
+summoning
+
+newritual       "Build Star Fort"
+descr "To really establish a foothold in Elysium, the federal government has authorized the creation and garrison of star forts from which order can be brought this new world."
+level           3
+cost		 	0 1
+cost            0 200
+cost            1 75
+apcost          3
+terr            -71
+nonearby7req    577
+nonearby5req    -28
+alterloc        577
+addstring       "1*Federal Garrison Commander & 4d3*Federal Garrison Troop & 2*Federal Garrison Cannon & 2d2*Federal Garrison Grenadier"
+summoning
+
+newritpow # Prospector rituals
+
+newritual       "Establish Electric Mine"
+descr "It seems electricity has not yet come to Elysium. Outside of the town, the mine seems the most logical place to use it to increase productivity."
+level           1
+cost            0 100
+cost            1 20
+terr            14
+alterloc        573
+free
+
+newritual       "Order Barrels of Nitroglycerine"
+descr "Turn out this newly formulated chemical, nitroglycerine, is highly explosive. Seems useful to put in the ground in case some fools decide to tread where they don't belong."
+level           1
+cost		 	0 30
+addstring       "2*Nitroglycerine Barrel"
+summoning
+apcost          2
+free
+
+newritual       "Bury Land Mines"
+descr "Yup. One barrel of Nitroglycerine can be put into a trap that will explode big. Up to four can be made at a time."
+level           1
+cost            1 4
+promotion       4
+addstring       "Nitroglycerine Barrel"
+addstring       "Nitroglycerine Land Mine"
+free
+
+
+# ---------- New Weapons ---------------
+
+sample 230 "./sounds/pistol.sw"
+sample 231 "./sounds/cannon.sw"
+
+newweapon           "Winchester Rifle"
+trgrank             1 # Target: front enemy (any enemy in range, preferring front-most).
+range               7
+init                2
+dmgtype             3 # Pierce
+dmg                 5
+flymode             1
+flylook             2
+flysound            13 # Temporary
+an
+arrow
+mundane
+
+newweapon           "Colt Revolver"
+trgrank             1
+range               5
+init                2
+dmgtype             3 # Pierce
+dmg                 4
+arrow
+mundane
+flymode             1
+flylook             2
+flysound          230 # Temporary
+
+newweapon           "Revolver of Holy Retribution"
+trgrank             1
+range               5
+init                2
+dmgtype             3 # Pierce
+dmg                 6
+arrow
+mundane
+holykill
+flymode             1
+flylook             2
+flysound          230 # Temporary
+
+newweapon           "Colt Double-Action Revolver"
+trgrank             1
+range               5
+init                4
+dmgtype             3 # Pierce
+dmg                 4
+arrow
+mundane
+flymode             1
+flylook             2
+flysound          230 # Temporary
+
+newweapon           "Derringer"
+trgrank             1
+range               4
+init                4
+dmgtype             3 # Pierce
+dmg                 3
+arrow
+mundane
+flymode             1
+flylook             2
+flysound            13 # Temporary
+huge
+
+newweapon           "Tomahawk"
+trgrank             1
+range               3
+init                2
+dmgtype             1 # Slash
+dmg                 5
+oneshot
+mundane
+arrow
+lob
+rangepen
+flymode             1
+flylook             8
+flysound            19
+scatter
+
+newweapon   		"Camel Bite"
+trgrank             1
+range               1
+dmgtype             3
+init                3
+dmg                 8
+aoe                 0
+sound               32
+drain
+mundane
+stone
+soft
+next
+nextdmg              1 # Diseased
+
+newweapon 			"Infected Bite"
+dmgtype 			12
+
+newweapon           "Gore"
+range               1
+init                6
+dmgtype             1
+dmg                 5
+mundane
+sound               8
+
+newweapon           "Cavalry Saber"
+range               1
+init                4
+dmgtype             1
+dmg                 7
+mundane
+sound               8
+
+newweapon           "Ruby Pickaxe"
+range               1
+init                3
+dmgtype             3
+dmg                 7
+mundane
+sound               8
+next
+nextdmg			   32
+
+newweapon 			"Set on Fire"
+dmgtype 12
+
+newweapon           "Saphire Pickaxe"
+range               1
+init                3
+dmgtype             3
+dmg                 7
+mundane
+sound               8
+next
+nextdmg			    2
+
+newweapon 			"Freeze"
+dmgtype 5
+
+newweapon           "Emerald Pickaxe"
+range               1
+init                3
+dmgtype             3
+dmg                 7
+mundane
+sound               8
+next
+nextdmg			    1
+
+newweapon 			"Poison"
+dmgtype 9
+
+newweapon           "Diamond Pickaxe"
+range               1
+init                3
+dmgtype             3
+dmg                 7
+mundane
+sound               8
+next
+nextdmg			    2
+
+newweapon 			"Shock"
+dmgtype 6 
+
+newweapon			"Railroad Hammer"
+range               1
+init                3
+dmgtype             2
+dmg                18
+mundane
+sound              11
+fullsweep
+onlyenemy
+an
+next
+nextdmg			   64
+
+newweapon 			"Stunned"
+dmgtype 12
+
+newweapon           "Shin Shiv"
+range               1
+init                4
+dmgtype             1
+dmg                 5
+mundane
+sound               8
+an
+next
+nextdmg			   128
+
+newweapon 			"Bleed Through"
+dmgtype 12
+look	34
+
+newweapon           "Bowie Knife"
+range               1
+init                3
+dmgtype             1
+dmg                 4
+mundane
+sound               8
+
+newweapon           "Hunting Axe"
+range               1
+init                2
+dmgtype             1
+dmg                 5
+mundane
+sound               8
+
+newweapon           "Woodcutting Axe"
+range               1
+init                4
+dmgtype             1
+dmg                 6
+mundane
+sound               8
+shieldneg
+
+newweapon           "Giant Woodcutting Axe"
+range               1
+init                4
+dmgtype             1
+dmg                24
+mundane
+sound               8
+shieldneg
+fullsweep
+
+newweapon           "Prospector's Pickaxe"
+range               1
+init                4
+dmgtype             3
+dmg                 6
+mundane
+sound               8
+next
+nextdmg             524288
+an
+
+newweapon           "Midas' Touch"
+dmgtype             12
+
+newweapon           "Gatling Gun"
+trgrank             9
+range               26
+init                1
+dmgtype             3
+dmg                 7
+flymode             1
+flylook             2
+flysound            13 # Temporary
+mundane
+arrow
+scatter
+an
+
+newweapon           "Cannon"
+trgrank             9
+range               36
+init                1
+dmgtype             2
+dmg                 16
+nextalways
+nextdmg             16
+flymode             1
+flylook             33
+flysound            13
+sound              231
+reloadsnd           -1
+reload2
+an
+mundane
+lob
+scatter
+stonekill
+
+newweapon           "Cannon Roll"
+trgrank             9
+dmgtype             2
+aoe                 5004
+look                27
+
+newweapon           "Dynamite Bundle"
+trgrank				9
+range               5
+init                1
+dmgtype             2
+dmg                 1
+aoe                 0 
+flymode             1
+flylook             33
+flysound            68
+oneshot
+lob
+nextalways
+nextdmg             14
+
+newweapon           "Kaboom"
+trgrank				9
+dmgtype             4
+aoe                 10
+look				69
+sound              231
+
+newweapon           "Single Barrel Shotgun"
+range               4
+init                4
+dmgtype             3
+dmg                 4
+aoe                 2008
+next
+nextdmg             64
+mundane
+flymode             4
+flylook             2
+flysound            27
+sound               -1
+
+newweapon           "Shotgun Blast"
+dmgtype             12
+
+newweapon           "Sharps Rifle"
+trgrank             8
+range               50
+init                1
+dmgtype             3
+dmg                 30
+an
+reload2
+mundane
+arrow
+shieldneg
+flymode             1
+flylook             2
+flysound            27
+
+newweapon           "Starr Carbine"
+trgrank             1
+range               12
+init                1
+dmgtype             3
+dmg                 10
+an
+reload1
+mundane
+arrow
+shieldneg
+flymode             1
+flylook             2
+flysound            27
+
+newweapon           "Fast Sharps Rifle"
+trgrank             8
+range               50
+init                1
+dmgtype             3
+dmg                 30
+an
+mundane
+arrow
+shieldneg
+flymode             1
+flylook             2
+flysound            27
+
+newweapon           "Springfield Rifle"
+trgrank             1
+range               8
+init                1
+dmgtype             3
+dmg                 6
+an
+oneshot
+mundane
+arrow
+shieldneg
+flymode             1
+flylook             2
+flysound            27
+
+newweapon			"Old Betsy"
+trgrank             1
+range               10
+init                1
+dmgtype             3
+dmg                 16
+an
+reload1
+mundane
+arrow
+shieldneg
+flymode             1
+flylook             2
+flysound            27
+
+
+newweapon           "Explosive Fanning Pistol"
+trgrank             1
+range               4
+init                2
+dmgtype             3 # Pierce
+dmg                 5
+arrow
+mundane
+flymode             1
+flylook             2
+flysound          230 # Temporary
+nextalways
+nextdmg 3
+
+newweapon 			"Bullet Explosion"
+dmgtype 4
+look 68
+an
+mundane
+
+newweapon			"Gaze of Terror"
+trgrank              8 # Target: a rear enemy
+range               20
+init                 1
+dmgtype              7 # Magic.
+dmg                 10 # Base damage (added to dmg value where this weapon is used).
+aoe                  0 # Area: Single target.
+an                     # Armor negating.
+hardmorale
+undead
+mind
+sound			    40 # Shatter
+look			   135 # Dark power
+next
+nextdmg			    16 # Paralyze
+
+newweapon "Frozen in Fear"
+dmgtype 12
+
+newweapon     		"Jane's Whip"
+trgrank              1
+range                3
+init                 1
+dmgtype              1 # Slash.
+dmg                  4 # Base damage (added to dmg value where this weapon is used).
+aoe                  0 # Area: Single target.
+sound			     9 # whip.smp 
+look			   121 # Hold
+soft
+next
+nextdmg			  512
+
+newweapon "Wrapped Up"
+dmgtype 12
+
+newweapon			"Winchester Centennial Rifle"
+trgrank             1
+range               10
+init                1
+dmgtype             3
+dmg                 16
+an
+mundane
+arrow
+shieldneg
+flymode             1
+flylook             2
+flysound            27
+
+newweapon       	"Wad of Cash"
+trgrank				9
+range               1
+init                1
+dmgtype             2
+dmg                 2
+sound				32
+
+newweapon       	"Summon Low Wage Worker" #Summons poorly paid workers to fight for him
+trgrank             7
+range               20
+init                1
+dmgtype             18
+dmg                 10
+
+newweapon       	"Money!" #When you've got enough, you can do whatever you want with it, including throwing it at people
+trgrank				9
+range               4
+init                1
+dmgtype             2
+dmg                 3
+aoe                 0 
+flymode             1
+flylook             32
+flysound            15
+sound				11
+lob
+
+newweapon			"Machete"
+range               1
+init                4
+dmgtype             1
+dmg                 5
+mundane
+sound               8
+
+newweapon			"Hand Fashioned Flail"
+range               1
+init                4
+dmgtype             1
+dmg                 3
+mundane
+sound               9 # whip.smp 
+next
+nextdmg			   128
+
+newweapon 			"Bleed Through"
+dmgtype 12
+look	34
+
+newweapon			"Blood Bolt"
+trgrank              9 # Target: any enemy
+range                4
+init                 1
+dmgtype              8  # Fear.
+dmg                  5 # Base damage (added to dmg value where this weapon is used).
+aoe                  0 # Area: Single target.
+an                     # Armor negating.
+mr
+sound			   104 # magicshot.smp 
+look			    67 # Blood (line)
+
+newweapon			"Blessed Blade"
+range               1
+init                4
+dmgtype             1
+dmg                 6
+mundane
+sound               8
+holykill
+
+newweapon			"Radiant Blast"
+trgrank              9 # Target: any enemy
+range                6
+init                 1
+dmgtype              7  # Magic.
+dmg                  6 # Base damage (added to dmg value where this weapon is used).
+aoe                  0 # Area: Single target.
+an                     # Armor negating.
+hardmr
+sound			   104 # magicshot.smp 
+flylook 			83 # Blood burst
+next
+nextdmg		    262144
+
+newweapon 			"Aftershock"
+dmgtype 12
+look	83
+
+newweapon       	"Wrench"
+range               1
+init                2
+dmgtype             2
+dmg                 3
+sound				11
+
+newweapon       	"Dark Touch"
+trgrank				9
+range               1
+init                2
+dmgtype             22 
+dmg                 5
+sound				22
+look				39
+
+# ---------- New Magic Items ---------------
+
+newitem             "Ten-Gallon Hat"
+descr               "The legendary hat of Tomothy "Huge Hat" Flemmings"
+spr                 "./sprites/hat.tga"
+rarity              3
+type                3
+protection          3
+
+newitem             "Holey Bible"
+descr               "The legendary scripture of the gunslinging preacher known as Jane "Righteous Fury" McAdoo"
+spr                 "./sprites/bible32.tga"
+rarity              3
+type                7
+mr          		4
+armor               1
+
+# ---------- New Units ---------------
+
+# Basic Recruitment
+newmonster          "Cowboy"
+spr1                "./sprites/cowboy1.tga" 
+spr2                "./sprites/cowboy2.tga"
+descr "The wild west was tamed by these famous gunmen. So were the cows. Now they willingly push across Elyisum in search of glory and more cows."
+hp                  6
+armor               0
+mr                  4
+mor                 4
+str                 4
+rank                0
+human
+allitemslots
+rangedweapon        0 "Winchester Rifle"
+meleeweapon         0 "Bowie Knife"
+desert	
+drawsize			10
+
+newmonster          "Deputy"
+spr1                "./sprites/deputy1.tga"
+spr2                "./sprites/deputy2.tga"
+descr "Someone needs to bring law to Elysium...and that person needs a deputy. Just don't shoot them."
+hp                  6
+armor               0
+mr                  4
+mor                 5
+str                 4
+rank                0
+rearpos
+human
+rangedweapon        0 "Winchester Rifle"
+rangedweapon25      0 "Colt Revolver"
+meleeweapon         0 "Bowie Knife"
+desert
+mastery             1
+allitemslots
+nametype            2
+drawsize			10
+chopforest          1
+
+newmonster          "Sheriff"
+spr1                "./sprites/sheriff1.tga"
+spr2                "./sprites/sheriff2.tga"
+descr "Law will be brought to Elysium, and the Sheriff is gonnna bring it. With his trusty deputy at their side and the authority of the town upon him, he will do his duty."
+hp                  7
+armor               1
+mr                  4
+mor                 6
+str                 5
+rank                0
+rearpos
+human
+rangedweapon        0 "Winchester Rifle"
+rangedweapon25      0 "Colt Revolver"
+meleeweapon         0 "Bowie Knife"
+desert
+power               -1 1
+mastery             1
+allitemslots
+leadership          1
+nametype            2
+drawsize			10
+chopforest          1
+
+newmonster          "Ranger"
+spr1                "./sprites/ranger1.tga"
+spr2                "./sprites/ranger2.tga"
+descr "As the town grows beyond the saloon, the government is becoming more involved, bestowing more authority upon a sheriff, making him into a full Ranger."
+hp                  10
+armor               1
+mr                  5
+mor                 6
+str                 6
+rank                0
+rearpos
+human
+rangedweapon        0 "Winchester Rifle"
+rangedweapon25      0 "Colt Revolver"
+meleeweapon         0 "Cavalry Saber"
+meleeweapon         4 "Hoof"
+fast
+power               -1 2
+mastery             1
+allitemslots
+leadership          1
+nametype            2
+drawsize			10
+chopforest          1
+nobootslots
+desert
+
+newmonster          "Marshal"
+spr1                "./sprites/marshal1.tga"
+spr2                "./sprites/marshal2.tga"
+descr  "The government is in this for the long haul. A Marshal has been sent with their backing to make sure their foothold on Elysium is absolute."
+hp                  14
+armor               2
+mr                  5
+mor                 6
+str                 6
+rank                0
+rearpos
+human
+rangedweapon        0 "Winchester Rifle"
+rangedweapon25      0 "Colt Revolver"
+meleeweapon         0 "Cavalry Saber"
+meleeweapon         4 "Hoof"
+fast
+power               -1 3
+allitemslots
+leadership          2
+nametype            2
+drawsize			10
+chopforest          1
+nobootslots
+desert
+
+newmonster          "Mayor"
+spr1                "./sprites/mayor1.tga"
+spr2                "./sprites/mayor2.tga"
+descr "Every town needs a mayor. Who else is going to authorize construction and collect all the taxes?"
+hp                  5
+armor               0
+mr                  4
+mor                 5
+str                 4
+rank                0
+rearpos
+human
+rangedweapon      	0 "Colt Revolver"
+meleeweapon         0 "Fist"
+desert
+power               -3 1
+allitemslots
+nametype            2
+drawsize			10
+mastery             1
+
+newmonster          "Governor"
+copystats			"Mayor"
+spr1                "./sprites/mayor1.tga" #FIXME
+spr2                "./sprites/mayor2.tga" #FIXME
+descr "The town is much bigger now and requires something more than just a mayor, so now there's a full blown governor. This governor has the authority to send explorers to seek legends of folklore to support the town."
+hp                  6
+power               -3 2
+allitemslots
+nametype            2
+drawsize			10
+
+newmonster          "Plains Cavalryman"
+spr1                "./sprites/cavalryman1.tga"
+spr2                "./sprites/cavalryman2.tga"
+descr "A member of a horse-mounted cavalry unit, the plains cavalryman seeks not his own glory, rather to bring law and order to the savages of Elysium."
+hp                  10
+armor               0
+mr                  4
+mor                 5
+str                 5
+rank                0
+human
+rangedweapon        0 "Winchester Rifle"
+meleeweapon         0 "Cavalry Saber"
+meleeweapon         4 "Hoof"
+fast
+drawsize			10
+nobootslots
+
+newmonster          "Cavalry Troop Commander"
+copystats			"Plains Cavalryman"
+descr "The troop commander is chosen to lead a horse-mounted cavalry unit. With his ordained authority, he will execute swift justice upon the savages of Elysium."
+spr1                "./sprites/cav_commander1.tga"
+spr2                "./sprites/cav_commander2.tga"
+hp                  12
+nametype            2
+
+newmonster          "Camel Corps"
+spr1                "./sprites/corps1.tga"
+spr2                "./sprites/corps2.tga"
+descr "Back home, the Camel Corps was a miserable failure. But perhaps in the deserts of Elysium it can find success as an elite scouting force."
+hp                  9
+armor               0
+mor                 4
+str                 4
+mr                 	4
+rank                0
+human
+rangedweapon        0 "Winchester Rifle"
+meleeweapon         0 "Cavalry Saber"
+fast
+nobootslots
+acutesenses
+farsight
+desertstealth
+desert
+
+newmonster          "Camel Corps Commander"
+copystats			"Camel Corps"
+descr "Back home, the Camel Corps was a miserable failure. But perhaps in the deserts of Elysium it can find success as an elite scouting force."
+spr1                "./sprites/commander1.tga"
+spr2                "./sprites/commander2.tga"
+hp                  11
+mor                 5
+nametype            2
+
+newmonster          "Desperado"
+spr1                "./sprites/desperado1.tga"
+spr2                "./sprites/desperado2.tga"
+descr "The Desperado is more than a man; he's a myth. Stories tell of a doomed heist where he robbed a train as it fell off a ten thousand-foot cliff, only to be spotted a week later in the Saloon, nursing a drink with money falling out of his pockets. Seeking greater infamy, he single-handedly opened the Elysium frontier using a map he claimed to have found in the lost city of El Dorado itself."
+hp                  18
+armor               2
+mr                  5
+mor                 7
+str                 5
+rank                1
+human
+allitemslots
+rangedweapon        0 "Starr Carbine"
+rangedweapon25      2 "Colt Double-Action Revolver"
+rangedweapon25      2 "Colt Double-Action Revolver"
+meleeweapon         4 "Machete"
+noleader
+nametype            2
+drawsize			20
+acutesenses
+twistfate
+desert
+desertstealth
+awe					1
+immortal
+immortalap        	9
+reformloc        	563
+affres				75
+
+newmonster          "Gambler"
+spr1                "./sprites/gambler1.tga"
+spr2                "./sprites/gambler2.tga"
+descr "Gamblers live and die by the luck of the draw...that is, if you're new to this line of work. In reality, the deck is always stacked in his favor, whether his opponent knows it or not."
+hp                  7
+armor               0
+mr                  3
+mor                 3
+str                 4
+rank                0
+human
+rangedweaponbonus   0 "Colt Revolver"
+meleeweapon         0 "Bowie Knife"
+drawsize			10
+lucky
+desert
+
+newmonster          "Gunslinger"
+spr1                "./sprites/gunslinger1.tga"
+spr2                "./sprites/gunslinger2.tga"
+descr "One gun for each hand, and a couple extra just in case. Anyone carrying this many guns is clearly compensating for something."
+hp                  6
+armor               0
+mr                  4
+mor                 4
+str                 4
+rank                0
+human
+rangedweaponbonus  	0 "Colt Revolver"
+rangedweaponbonus   0 "Colt Revolver"
+allitemslots
+drawsize			8
+berserker
+desert
+
+newmonster          "Prospector"
+spr1                "./sprites/prospector1.tga"
+spr2                "./sprites/prospector2.tga"
+descr "Once he heard there was gold on Elysium, there was no stopping him. With his trust boomstick and dynamite, he'll clear anything in his path until he can get his pick into some gold."
+hp                  12
+armor               0
+mr                  4
+mor                 6
+str                 5
+rank                1
+human
+rangedweapon        0 "Single Barrel Shotgun"
+rangedweapon        2 "Dynamite Bundle"
+meleeweapon         0 "Prospector's Pickaxe"
+power               0 1
+nametype            2
+goldcarrier			10
+gathergems
+desert
+mountain
+
+newmonster          "Miner"
+spr1                "./sprites/miner1.tga"
+spr2                "./sprites/miner2.tga"
+descr "A miner is a desperate soul. And though he might seek to get rich quick in the depths, he is more likely to find death than fortune."
+hp                  5
+armor               0
+mr                  3
+mor                 4
+str                 4
+rank                1
+human
+meleeweapon         0 "Pick Axe"
+drawsize			10
+desert
+mountain
+
+newmonster          "Ruby Miner"
+copystats			"Miner"
+spr1                "./sprites/ruby1.tga"
+spr2                "./sprites/ruby2.tga"
+fireres				50
+clearweapons
+meleeweapon         0 "Ruby Pickaxe"
+
+newmonster          "Saphire Miner"
+copystats			"Miner"
+spr1                "./sprites/saphire1.tga"
+spr2                "./sprites/saphire2.tga"
+coldres				50
+clearweapons
+meleeweapon         0 "Saphire Pickaxe"
+
+newmonster          "Emerald Miner"
+copystats			"Miner"
+spr1                "./sprites/emerald1.tga"
+spr2                "./sprites/emerald2.tga"
+poisonres			50
+clearweapons
+meleeweapon         0 "Emerald Pickaxe"
+
+newmonster          "Diamond Miner"
+copystats			"Miner"
+spr1                "./sprites/diamond1.tga"
+spr2                "./sprites/diamond2.tga"
+shockres			50
+clearweapons
+meleeweapon         0 "Diamond Pickaxe"
+
+newmonster          "Preacher"
+spr1                "./sprites/preacher1.tga"
+spr2                "./sprites/preacher2.tga"
+descr "The preacher represents the hand of the Almighty bringing light to the heretics of Elysium. Most importantly the heathens of El. His duties consist of delivering sermons, performing miracles for true believers, and lining his pockets with cash."
+hp                  5
+armor               0
+mr                  5
+mor                 6
+str                 4
+rank                0
+rearpos
+human
+holy
+allitemslots
+meleeweapon         0 "Fist"
+spellweapon		   25 1
+nametype            2
+power              -2 1
+drawsize			10
+spiritsight
+
+newmonster          "Circuit Rider"
+copystats			"Preacher"
+descr "Not all heathens are within walking distance. As such, the Almighty has inspired his servants to study the art of horseback riding."
+spr1 "/sprites/rider1.tga"
+spr2 "/sprites/rider2.tga"
+hp                  7
+clearweapons
+meleeweapon         0 "Fist"
+meleeweapon         4 "Hoof"
+spellweapon		   25 1
+fast
+holy
+drawsize		   -10
+allitemslots
+nobootslots
+desert
+
+newmonster          "Divine Preacher"
+spr1                "./sprites/divine1.tga"
+spr2                "./sprites/divine2.tga"
+descr "During his trial of faith, this preacher has glimpsed divinity and been transformed into something greater than himself. His only wish is to fulfill that which the Almighty commands."
+hp                  6
+armor               0
+mr                  8
+mor                 8
+str                 4
+rank                0
+rearpos
+human
+holy
+allitemslots
+meleeweapon         0 "Fist"
+spellweapon		   64 3
+nametype            2
+drawsize			10
+spiritsight
+
+newmonster          "Defender of the Divine"
+spr1                "./sprites/defender1.tga"
+spr2                "./sprites/defender2.tga"
+descr "Only the most pure of followers will be chosen to defend the Elect of the Almighty. But they also must pass a physical examination first, in case they were born infirm."
+hp                 10
+armor               1
+mr                  5
+mor                 6
+str                 5
+rank                1
+fireres			   25
+human
+meleeweapon         2 "Blessed Blade"
+drawsize			10
+
+newmonster          "Zealot of the Divine"
+spr1                "./sprites/zealot1.tga"
+spr2                "./sprites/zealot2.tga"
+descr "The devout who have shown fervent loyalty to the Divine Preacher are entrusted with a fraction of the Almighty's power. How they use it is between them and the Almighty himself."
+hp                  6
+armor               0
+mr                  6
+mor                 6
+str                 4
+rank                0
+human
+rangedweapon      	0 "Radiant Blast"
+meleeweapon         0 "Fist"
+drawsize			10
+
+newmonster          "Hellfire Preacher"
+spr1                "./sprites/hellfire1.tga"
+spr2                "./sprites/hellfire2.tga"
+descr "During his trial of faith, this preacher has glimpsed the hell that awaits the unrepentant. His only wish is to cleanse Elysium with holy fire, as the Almighty demands."
+hp                  6
+armor               0
+mr                  8
+mor                 7
+str                 4
+rank                0
+rearpos
+human
+allitemslots
+meleeweapon         0 "Fist"
+spellweapon		    1 3
+nametype            2
+drawsize			10
+spiritsight
+
+newmonster          "Corrupted Flagellant"
+spr1                "./sprites/corrupted1.tga"
+spr2                "./sprites/corrupted2.tga"
+descr "Painfully aware of their sinful state, flagellants of the Almighty have fully given themselves unto Him as a vessel. Through them, the mind of the Divine will root out all evil."
+hp                  8
+armor               0
+mr                  5
+mor                99
+str                 5
+rank                1
+human
+meleeweapon         0 "Hand Fashioned Flail"
+drawsize			10
+
+newmonster          "Hellfire Cultist"
+spr1                "./sprites/pupil1.tga"
+spr2                "./sprites/pupil2.tga"
+descr "Those who are willing to give up all that they used to be and follow the Call of the Almighty may be entrusted with a gift of punishing grace. How they use it is between them and the Almighty himself."
+hp                  6
+armor               0
+mr                  6
+mor                 6
+str                 4
+rank                0
+human
+rangedweapon      	0 "Blood Bolt"
+meleeweapon         0 "Fist"
+drawsize			10
+
+newmonster          "Unholy Protege"
+spr1                "./sprites/protege1.tga"
+spr2                "./sprites/protege2.tga"
+descr "The Almighty, in his fury, finds purpose even for the heretics of Elysium. The clergy of apostate religions may be raised to finally serve the True Diety. Some believe it is an opportunity for redemption, but as the Book says, 'punishment for the wicked shall never cease.'"
+hp                  6
+armor               0
+mr                  6
+mor                 6
+str                 4
+rank                0
+undead
+meleeweapon         0 "Dark Touch"
+spellweapon		    9 2
+drawsize			10
+
+newmonster          "Nitroglycerine Barrel"
+spr1                "./sprites/barrel.tga" #FIXME
+descr "An unassuming barrel made of wood. What might its contents bring? Perhaps a feast from a rich harvest? Or maybe just water rations? Either way, it'd be best not to smoke near it."
+hp                  3
+armor               0
+mr                  5
+mor                99
+str                 0
+rank                0
+rearpos
+slow
+immobile
+nozoc
+slashres
+fireres          -100
+fireexpl           10
+
+newmonster			"Nitroglycerine Land Mine"
+descr "A curious device fashioned from wood and iron. It is said to carry the power of 2 tons of TNT. But does it detonate when you step on it? Or when you step off? Only one way to find out!"
+spr1                "./sprites/land_mine1.tga"
+spr2                "./sprites/land_mine2.tga"
+armor               0 # Armor.
+hp                  1 # Hit Points.
+str                 0 # Strength.
+mor                99 # Morale.
+mr                  2 # Magic Resistance.
+rank                1 # Front rank.
+fireexpl		   15
+shardexpl			5
+immobile
+stationary
+tiny
+stealth
+deployoutside     	1
+noeyes
+noslots
+fireres			 -100
+poisonres 		  100
+diseaseres
+sleepres
+charmres
+displaced			1
+drawsize		  -50
+unaging
+
+newmonster			"Bull"
+spr1                "./sprites/bull1.tga"
+spr2                "./sprites/bull2.tga"
+descr "An untamed bull is a tempermental beast. So is a tamed one, but that's never stopped the pioneers from tying them to grindstones for their mills."
+hp                  22
+armor               0
+mr                  2
+mor                 4
+str                 6
+rank                1
+meleeweapon         5 "Gore"
+size2x2
+drawsize		   -30
+desert
+
+newmonster          "Gatling Gun"
+spr1                "./sprites/gatlinggun1.tga"
+spr2                "./sprites/gatlinggun2.tga"
+descr "When one truly needs quantity over quality. Point it in the right direction and anyone downrange will be severely mist."
+hp                  14
+armor               0
+mr                  4
+mor                 5
+str                 4
+rank                0
+rearpos
+slow
+immobile
+human
+miscslots
+fireres             25
+siegeweapon         0 "Gatling Gun"
+rangedweaponbonus   3 "Gatling Gun"
+rangedweaponbonus   3 "Gatling Gun"
+rangedweaponbonus   3 "Gatling Gun"
+rangedweaponbonus   3 "Gatling Gun"
+rangedweaponbonus   3 "Gatling Gun"
+rangedweaponbonus   3 "Gatling Gun"
+meleeweapon         0 "Bowie Knife"
+drawsize			30
+
+newmonster          "Cannon"
+spr1                "./sprites/cannon1.tga"
+spr2                "./sprites/cannon2.tga"
+descr "The biggest of jobs require the biggest of guns."
+hp                  16
+armor               0
+mr                  4
+mor                 5
+str                 4
+rank                0
+rearpos
+slow
+immobile
+miscslots
+pierceres
+fireres             50
+fireexpl            8
+siegeweapon         0 "Cannon"
+rangedweapon        0 "Cannon"
+meleeweapon         0 "Bowie Knife"
+human
+drawsize			30
+
+# Special Recruitment
+newmonster          "Frontiersman"
+spr1                "./sprites/frontiersman1.tga"
+spr2                "./sprites/frontiersman2.tga"
+descr "Only the bravest would dare to explore the wild frontier. That said, the wilds of Elysium are a test of mettle to even the most experienced frontiersman. Fortunately, what they lack in social interaction they make up for in foolish bravery."
+hp                  7
+armor               1
+mr                  4
+mor                 5
+str                 5
+rank                1
+human
+rangedweapon        0 "Springfield Rifle"
+meleeweapon         0 "Hunting Axe"
+drawsize			10
+foreststealth
+
+newmonster          "Sniper"
+spr1                "./sprites/sniper1.tga"
+spr2                "./sprites/sniper2.tga"
+descr "Snipers are an odd bunch. They are incredible marksmen but tend to be impossible to approach. If you've met one, know that they already have a plan to kill you, should it become necessary. They call it a 'professional courtesy.'"
+hp                  5
+armor               0
+mr                  3
+mor                 4
+str                 4
+rank                0
+rearpos
+human
+assassinweapon      0 "Sharps Rifle"
+rangedweapon        0 "Sharps Rifle"
+meleeweapon        -1 "Bowie Knife"
+drawsize			10
+
+newmonster          "Lumberjack"
+spr1                "./sprites/lumberjack1.tga"
+spr2                "./sprites/lumberjack2.tga"
+descr				"Lumberyard workers are hard-working, but they're okay. They are often required to sleep all night so that they may work all day."
+hp                  9
+armor               0
+mr                  4
+mor                 5
+str                 5
+rank                1
+human
+meleeweapon         2 "Woodcutting Axe"
+drawsize			20
+chopforest          1
+desert
+
+newmonster          "Lumber Yard Foreman"
+spr1                "./sprites/foreman1.tga"
+spr2                "./sprites/foreman2.tga"
+descr				"Foremen demand the best of their workers. They don't do much themselves, regardless of how much they claim to 'track quota.' It is a rare sight to see one even so much as stand up from his chair."
+hp                  8
+armor               0
+mr                  4
+mor                 6
+str                 5
+rank                1
+human
+meleeweapon         2 "Woodcutting Axe"
+drawsize			25
+stationary
+
+# LOCAL LEGENDS
+newmonster          "'Six-Fingered' Dirk"
+spr1                "./sprites/dirk1.tga"
+spr2                "./sprites/dirk2.tga"
+descr				"In the sun-scorched tales of the frontier, there echoes a legend that sends shivers down the spines of both outlaws and lawmen alike – the mythic gunslinger known only as "Six-Fingered" Dirk. His notoriety stems not only from the extra digit adorning his skilled hand but also from the mysterious pistol he wields, a weapon that spits explosive fury with each pull of the trigger. Legend has it that Dirk's pistol, named "Boomshard," was forged in the crucible of a long-forgotten blacksmith with a love for nitroglycerin. The bullets it fires carry the wrath of thunderstorms, detonating upon impact with a ferocity that can turn the tide of any showdown. Yet, it's Dirk's unparalleled skill in fanning the hammer that truly distinguishes him from the rest – a relentless storm of explosive bullets that can reduce a town to silence in moments."
+hp                  9
+armor               1
+mr                  4
+mor                 6
+str                 5
+rank                0
+human
+rangedweapon        2 "Explosive Fanning Pistol"
+rangedweaponbonus   2 "Explosive Fanning Pistol"
+rangedweaponbonus   2 "Explosive Fanning Pistol"
+rangedweaponbonus   2 "Explosive Fanning Pistol"
+rangedweaponbonus   2 "Explosive Fanning Pistol"
+rangedweaponbonus   2 "Explosive Fanning Pistol"
+allitemslots
+localleadership		1
+unique				1
+drawsize			10
+desert
+awe					1
+
+newmonster          "Tomothy 'Huge Hat' Flemmings"
+spr1                "./sprites/tomothy1.tga"
+spr2                "./sprites/tomothy2.tga"
+descr				"The tales of the Wild West tell of a legend that defies all expectations, a gunslinger known as Tomothy "Huge Hat" Flemmings. Stories of this enigmatic figure paint a surreal picture: a man with a body so slight and unassuming that many ponder whether he's the man or the hat he's named after. But it's the hat itself that truly captures the imagination. A massive, ornate monstrosity of stitched leather, decorated with bizarre charms and symbols. It defies gravity, perched atop Tomothy's minuscule head with an inexplicable, supernatural force. Some whisper that the hat possesses a consciousness of its own, guiding Tomothy's deadly accuracy and granting him preternatural reflexes. Few have seen Tomothy without his iconic hat, and even fewer have lived to tell the tale. Is he the man, the hat, or a symbiotic fusion of both?"
+hp                  34
+armor               1
+mr                  5
+mor                 6
+str                 4
+rank                1
+human
+rangedweapon        0 "Derringer"
+meleeweapon         1 "Shin Shiv"
+startitem			"Ten-Gallon Hat"
+allitemslots
+airshield		    50
+tiny
+drawsize			140
+size2x2
+desert
+unique				1
+awe					1
+
+newmonster          "Jane 'Righteous Fury' McAdoo"
+spr1                "./sprites/mcadoo1.tga"
+spr2                "./sprites/mcadoo2.tga"
+descr				"In the rugged expanse of the frontier, where justice often rides the barrel of a gun, the name Jane 'Righteous Fury' McAdoo is spoken with a mixture of awe and reverence. A gunslinging preacher of unparalleled conviction, she bears the dual mantle of the cloth and the colt. Armed with a holy pistol sanctified by the tears of angels, the weapon carries with it a consecrated purpose, dealing righteous retribution to the sinful that dare cross her path. However, it's not just the firearm that defines her; it's the tattered Bible she clutches, adorned with a bullet hole that tells a tale of salvation. Her presence is a beacon of hope for the beleaguered and a harbinger of dread for the forces of darkness that linger in the shadows."
+hp                  6
+armor               0
+mr                  7
+mor                 7
+str                 3
+rank                0
+rearpos
+human
+spellweapon		   49 3
+startitem			"Holey Bible"
+rangedweapon        4 "Revolver of Holy Retribution"
+allitemslots
+awe					1
+holy
+drawsize			10
+desert
+unique				1
+awe					1
+
+newmonster          "'Rich Uncle' Milburn Pennybags"
+spr1                "./sprites/baron1.tga"
+spr2                "./sprites/baron2.tga"
+descr               "In the vast and untamed expanse of Elysium, one previously unknown man has made a name for himself—Milburn Pennybags. This mythical oil baron, draped in ostentatious finery, has built his fortune through a peculiar blend of insatiable greed and an unorthodox approach to problem-solving. Armed with a bottomless reservoir of wealth, Milburn is known to literally throw money at his obstacles, letting the fluttering bills pave the way for his relentless pursuit of oil-rich lands. For the Oil Baron, the pursuit of black gold is not merely a quest for riches; it's a calculated gamble where the currency of gold is weighed against the potential cost of human lives."
+hp                  5
+armor               1
+mr                  4
+mor                 6
+str                 3
+rank                0
+rearpos
+human
+meleeweapon         0 "Wad of Cash"
+#rangedweapon       0 "Summon Low Wage Worker"
+rangedweapon        0 "Money!" #When you've got enough, you can do whatever you want with it, including throwing it at people
+spawn1d6mon  	   40
+human
+gold                5 
+trade               1 
+goldcarrier         100
+awe                 1
+money1 				  #Just because
+allitemslots
+randomrare          50 #He's got enough money to start with a trinket right?
+unique              1
+
+newmonster          "Low Wage Worker"
+spr1                "./sprites/poor1.tga"
+spr2                "./sprites/poor2.tga"
+descr "Work is work. And for the poorest among the pioneers, the most common work is under Mr. Pennybags. It's not much, but it's an honest living...until you are the unfortunate soul who nearly drowns in a vat of oil for the third time this week."
+hp                  4
+armor               0
+mr                  3
+mor                 3
+str                 4
+rank                1
+human
+meleeweapon         0 "Wrench"
+drawsize			10
+
+newmonster          "Mirror Monocle Michael"
+# aims at back row by facing away from enemy, sees that objects in mirror are closer than they appear
+
+newmonster          "The Gentleman"
+# very powerful and dapper, but refuses to harm a woman
+
+# FERRY
+newmonster          "Ferry"
+# like a boat, but steamier
+
+# TRAIN
+newmonster          "Train Engine"
+# Give control to player
+spr1                "./sprites/train_engine.tga"
+descr               "Clad in layers of reinforced metal, its form reminiscent of a mechanical behemoth, the Leviathan barrels across landscapes with relentless determination. Driven by the rhythmic thump of steam pistons and belching clouds of pressurized vapor, the train's mighty wheels conquer terrains that would deter lesser locomotives, so long as those terrains have railroads that comply with Section 82-D of the official Armored Steam Leviathan Operating Manual. ^Be wary, leaving tracks, settlements, or the Saloon town will cause the Train to combust!"
+hp                  201
+armor               5
+mr                  4
+mor                99   
+str  			   10
+rank               -1
+fast
+immobile
+snow
+dmgonterr           -1112
+dmgonterrbonus      999
+tradebonus          25
+goldcarrier         200
+ironcarrier         50
+fireres             50
+poisonres          100
+diseaseres
+sleepres
+bluntres
+slashres
+noslots
+size2x2
+unaging
+alone               999
+fireexpl            30
+shardexpl           5
+rearpos
+rangedweapon        0 "Fast Sharps Rifle"
+deployoutside		1
+
+newmonster          "Train Gunner"
+spr1                "./sprites/train_gatling.tga"
+descr "Clad in layers of reinforced metal, its form reminiscent of a mechanical behemoth, the Leviathan barrels across landscapes with relentless determination. Driven by the rhythmic thump of steam pistons and belching clouds of pressurized vapor, the train's mighty wheels conquer terrains that would deter lesser locomotives, so long as those terrains have railroads that comply with Section 82-D of the official Armored Steam Leviathan Operating Manual. ^Be wary, leaving tracks, settlements, or the Saloon town will cause the Train to combust!"
+hp                  164
+armor               5
+mr                  4
+mor                99   
+str  			   10
+rank               -1
+immobile
+snow
+fast
+dmgonterr           -1112
+dmgonterrbonus      999
+fireres             50
+poisonres          100
+diseaseres
+sleepres
+bluntres
+slashres
+noslots
+size2x2
+unaging
+fireexpl            30
+shardexpl           5
+siegeweapon         0 "Gatling Gun"
+rangedweapon        0 "Gatling Gun"
+rangedweapon        0 "Gatling Gun"
+rangedweapon        0 "Fast Sharps Rifle"
+frontpos
+deployoutside		1
+
+newmonster          "Train Cannon"
+spr1                "./sprites/train_cannon.tga"
+descr "Clad in layers of reinforced metal, its form reminiscent of a mechanical behemoth, the Leviathan barrels across landscapes with relentless determination. Driven by the rhythmic thump of steam pistons and belching clouds of pressurized vapor, the train's mighty wheels conquer terrains that would deter lesser locomotives, so long as those terrains have railroads that comply with Section 82-D of the official Armored Steam Leviathan Operating Manual. ^Be wary, leaving tracks, settlements, or the Saloon town will cause the Train to combust!"
+hp                  170
+armor               5
+mr                  4
+mor                99   
+str  			   10
+rank               -1
+immobile
+fast
+snow
+dmgonterr           -1112
+dmgonterrbonus      999
+fireres             50
+poisonres          100
+diseaseres
+sleepres
+bluntres
+slashres
+noslots
+size2x2
+unaging
+fireexpl            30
+shardexpl           5
+siegeweapon         0 "Cannon"
+rangedweapon        0 "Cannon"
+rangedweapon        0 "Cannon"
+rangedweapon        0 "Fast Sharps Rifle"
+frontpos
+deployoutside		1
+
+newmonster          "Train Cargo"
+transport           10
+spr1                "./sprites/train_cargo.tga"
+descr "Clad in layers of reinforced metal, its form reminiscent of a mechanical behemoth, the Leviathan barrels across landscapes with relentless determination. Driven by the rhythmic thump of steam pistons and belching clouds of pressurized vapor, the train's mighty wheels conquer terrains that would deter lesser locomotives, so long as those terrains have railroads that comply with Section 82-D of the official Armored Steam Leviathan Operating Manual. ^Be wary, leaving tracks, settlements, or the Saloon town will cause the Train to combust!"
+hp                  210
+armor               5
+mr                  4
+mor                99   
+str  			   10
+rank               -1
+immobile
+fast
+snow
+dmgonterr           -1112
+dmgonterrbonus      999
+tradebonus          25
+goldcarrier         200
+ironcarrier         50
+fireres             50
+poisonres          100
+diseaseres
+sleepres
+bluntres
+slashres
+noslots
+size2x2
+unaging
+fireexpl            30
+shardexpl           5
+frontpos
+deployoutside		1
+
+newmonster          "Train Passenger Car"
+transport           10
+spr1                "./sprites/train_passenger.tga"
+descr "Clad in layers of reinforced metal, its form reminiscent of a mechanical behemoth, the Leviathan barrels across landscapes with relentless determination. Driven by the rhythmic thump of steam pistons and belching clouds of pressurized vapor, the train's mighty wheels conquer terrains that would deter lesser locomotives, so long as those terrains have railroads that comply with Section 82-D of the official Armored Steam Leviathan Operating Manual. ^Be wary, leaving tracks, settlements, or the Saloon town will cause the Train to combust!"
+hp                  149
+armor               5
+mr                  4
+mor                99   
+str  			   10
+rank               -1
+immobile
+fast
+snow
+dmgonterr           -1112
+dmgonterrbonus      999
+fireres             50
+poisonres          100
+diseaseres
+sleepres
+bluntres
+slashres
+noslots
+size2x2
+unaging
+fireexpl            30
+shardexpl           5
+rangedweapon        0 "Colt Double-Action Revolver"
+rangedweapon        0 "Colt Double-Action Revolver"
+rangedweapon        0 "Colt Double-Action Revolver"
+rangedweapon        0 "Colt Double-Action Revolver"
+rangedweapon        0 "Winchester Rifle"
+rangedweapon        0 "Winchester Rifle"
+rangedweapon        0 "Fast Sharps Rifle"
+rangedweapon        0 "Fast Sharps Rifle"
+frontpos
+deployoutside		1
+
+newmonster          "Train Caboose"
+spr1                "./sprites/train_caboose.tga"
+descr "Clad in layers of reinforced metal, its form reminiscent of a mechanical behemoth, the Leviathan barrels across landscapes with relentless determination. Driven by the rhythmic thump of steam pistons and belching clouds of pressurized vapor, the train's mighty wheels conquer terrains that would deter lesser locomotives, so long as those terrains have railroads that comply with Section 82-D of the official Armored Steam Leviathan Operating Manual. ^Be wary, leaving tracks, settlements, or the Saloon town will cause the Train to combust!"
+hp                  184
+armor               5
+mr                  4
+mor                99   
+str  			   10
+rank               -1
+immobile
+fast
+snow
+dmgonterr           -1112
+dmgonterrbonus      999
+fireres             50
+poisonres          100
+diseaseres
+sleepres
+bluntres
+slashres
+noslots
+size2x2
+unaging
+fireexpl            30
+shardexpl           5
+rangedweapon        0 "Fast Sharps Rifle"
+deployoutside		1
+
+# FOLKLORE UNITS
+newmonster          "Explorer"
+descr "Most explorers grew up hearing the tales of untamed beasts and mythical giants roaming the Western plains. Such stories were so unbelievable that they became determined to see for themselves, as long as they have the funds to do so, of course."
+spr1 "./sprites/explorer1.tga"
+spr2 "./sprites/explorer2.tga"
+hp                  6
+armor               0
+mr                  3
+mor                 5
+str                 5
+rank                1
+human
+rangedweapon        0 "Winchester Rifle"
+meleeweapon         0 "Hunting Axe"
+allitemslots
+drawsize		   10
+expendable			1
+
+# John Henry (frontline tank)
+newmonster          "Steel-Driving Man"
+descr "A symbol of physical strength and endurance. John Henry is willing to give his heart to prove that man cannot be bested by a machine."
+spr1 "./sprites/henry1.tga"
+spr2 "./sprites/henry2.tga"
+hp                 52
+armor               3
+mr                  5
+mor                 8
+str                 7
+rank                1
+human
+meleeweapon        10 "Railroad Hammer"
+allitemslots
+regeneration
+drawsize		   30
+unique				1
+
+# Davy Crockett (frontiersman commander utility)
+newmonster          "King of the Wild Frontier"
+descr "Can a man accomplish everything before he dies? Davy Crockett seems to think so. Recognized as a politician, a soldier, and a frontiersman, he believes there is yet more that awaits him in the wilds of Elysium."
+spr1 "./sprites/crockett1.tga"
+spr2 "./sprites/crockett2.tga"
+hp                 39
+armor               2
+mr                  4
+mor                 6
+str                 5
+rank                1
+human
+rangedweapon       10 "Old Betsy"
+meleeweapon         8 "Hunting Axe"
+allitemslots
+drawsize		   20
+leadership		    5
+foreststealth
+fastheal
+regeneration
+chopforest          1
+unique				1
+
+# Pecos Bill (wind magic)
+newmonster          "Greatest of All Cowboys"
+descr "In a land saturated in tall tales, Pecos Bill emerges as the greatest legendary figure of them all, deeply intertwined with myths of the vast wilderness. Born under an open sky, the child Pecos was left behind in the wilderness, where he found an unexpected family among the coyotes. Growing up, Bill became a master of the wilderness, showcasing unmatched strength and skills. Now he enters Elysium riding the twister that he lassoed with his favorite snake."
+spr1 "./sprites/pecos1.tga"
+spr2 "./sprites/pecos2.tga"
+hp                120
+armor               2
+mr                  8
+mor                16
+str                 8
+rank                1
+human
+rangedweapon        0 "Colt Revolver"
+meleeweapon         0 "Swallow"
+spellweaponbonus	58 3		
+drawsize			50
+huge
+shockaura 			3
+airshield		  100
+shockres		   50
+fear 				1
+tangleres			1
+unique				1
+
+# Calamity Jane (horseback)
+newmonster          "Heroine of the Plains"
+spr1                "./sprites/jane1.tga"
+spr2                "./sprites/jane2.tga"
+descr "Always flirting with disaster, Calamity Jane has earned her name among the greats of the West. She gained fame for her sharpshooting skills, unconventional lifestyle and daredevil attitude."
+hp                  42
+armor               2
+mr                  5
+mor                 6
+str                 6
+rank                0
+rearpos
+human
+rangedweapon        4 "Winchester Centennial Rifle"
+rangedweapon25      2 "Colt Double-Action Revolver"
+rangedweapon50      6 "Jane's Whip"
+meleeweapon         4 "Hoof"
+fast
+armytrainer         5
+allitemslots
+leadership          3
+nametype            2
+drawsize			10
+nobootslots
+desert
+unique 				1
+
+# Annie Oakley (lady sharpshooter army)
+newmonster          "Champion Markswoman"
+descr "A renowned sharpshooter and entertainer, Annie Oakley and her fearless sharpshooters spell the doom of any opposing leader. Story goes, she can shoot the shell off a snail from 500 yards."
+spr1 "./sprites/annie1.tga"
+spr2 "./sprites/annie2.tga"
+hp                 14
+armor               1
+mr                  4
+mor                 6
+str                 4
+rank                0
+rearpos
+human
+rangedweapon        0 "Sharps Rifle"
+drawsize			10
+unique				1
+
+newmonster          "Lady Sharpshooter"
+descr "The laady sharpshooters follow in the footsteps of their beloved leader. Their shots are just as accurate and almost as deadly."
+spr1 "./sprites/lady1.tga"
+spr2 "./sprites/lady2.tga"
+hp                  9
+armor               0
+mr                  4
+mor                 5
+str                 4
+rank                0
+rearpos
+human
+rangedweapon        0 "Sharps Rifle"
+drawsize			10
+
+# Paul Bunyan (Giant frontline)
+newmonster          "Giant Lumberjack"
+descr "Paul Bunyan is a legendary lumberjack from the deepest of folklore, famed for his colossal size and superhuman feats. With the company of his giant blue ox, Babe, Bunyan is said to have shaped landscapes, created natural landmarks, and cleared entire forests in a single swing of his axe."
+spr1 "./sprites/bunyan1.tga"
+spr2 "./sprites/bunyan2.tga"
+hp                146
+armor               3
+mr                  6
+mor                12
+str                 9
+rank                1
+awe					2
+meleeweapon        20 "Giant Woodcutting Axe"
+huge
+unique				1
+drawsize			20
+
+newmonster          "Blue Ox"
+descr "Ever the companion of Paul Bunyan, Babe towers just as tall and perhaps with even greater strength."
+spr1 "./sprites/babe1.tga"
+hp                180
+armor               4
+mr                  4
+mor                 8
+str                10
+rank                1
+meleeweapon        18 "Gore"
+huge
+fear 				1
+trample			   20
+unique				1
+drawsize			10
+  
+# Red Ghost (stealthy)
+newmonster          "Red Ghost"
+descr "The Red Ghost gained notoriety after it escaped from captivity following a lightning storm, carrying the skeletal remains of its deceased rider still strapped to the saddle. As the Red Ghost roamed the desolate landscapes, sightings of the creature struck fear into the hearts of those living on the frontier. Tales spread of the ghostly camel causing havoc, with some stories even suggesting that the Red Ghost had a taste for blood."
+spr1 "./sprites/red_ghost1.tga"
+spr2 "./sprites/red_ghost2.tga"
+hp                 48
+armor               0
+mor                 8
+str                 4
+mr                 10
+rank                0
+human
+rangedweapon        0 "Gaze of Terror"
+meleeweapon         0 "Camel Bite"
+meleeweapon         4 "Hoof"
+trample				4
+fast
+drawsize			10
+nobootslots
+spiritsight
+stealth
+desert
+ethereal
+coldres		 	  100
+poisonres		  100
+sleepres
+charmres
+unaging
+noeyes
+fear 1
+nametype		   40
+affres			  100
+immortal
+immortalap        	6
+reformloc         563 # TODO, eventually change it to be desert-like terrains but it wasn't working
+size2x2
+unique				1
+
+newmonster          "Si-Te-Cah"
+descr "Also known as the 'Saiduka' or 'Red-Haired Cannibals,' the Si-te-Cah are a race of tall, aggressive, beings who fear little and conquer all."
+spr1 "./sprites/redhead1.tga"
+spr2 "./sprites/redhead2.tga"
+meleeweapon 				7  "Bite"
+meleeweapon 			   10  "Fist"
+armor                          1 # Armor.
+hp                            58 # Hit Points.
+str                            8 # Strength.
+mor                            5 # Morale.
+mr                             5 # Magic Resistance.
+rank                           1 # Front rank.
+size2x2
+weaponslots
+drawsize 					  50
+
+# STAR FORT UNITS (DLC)
+newmonster          "Federal Garrison Soldier"
+spr1                "./sprites/placeholder.tga"
+spr2                "./sprites/placeholder.tga"
+descr "To entrench their position in this new world, federal garrison soldiers have been sent to garrison forts spread across Elysium."
+hp                 10
+armor               1
+mr                  4
+mor                 6
+str                 5
+rank                0
+human
+allitemslots
+rangedweapon        0 "Krag-Jorgensen Rifle"
+meleeweapon         0 "Knife Bayonet"
+drawsize            10
+stationary
+
+newmonster          "Federal Garrison Grenadier"
+spr1                "./sprites/placeholder.tga"
+spr2                "./sprites/placeholder.tga"
+descr "To entrench their position in this new world, federal garrison grenadiers have been sent to garrison forts spread across Elysium."
+hp                 10
+armor               1
+mr                  4
+mor                 6
+str                 5
+rank                0
+human
+allitemslots
+rangedweapon        0 "Grenade"
+meleeweapon         0 "Knife"
+drawsize            10
+stationary
+
+newmonster          "Federal Garrison Commander"
+spr1                "./sprites/placeholder.tga"
+spr2                "./sprites/placeholder.tga"
+descr "To entrench their position in this new world, federal garrison commanders hav been sent to command the garrison staioned at forts across Elysium."
+hp                 12
+armor               1
+mr                  4
+mor                 7
+str                 5
+rank                0
+human
+allitemslots
+rangedweapon        0 "Krag-Jorgensen Rifle"
+meleeweapon         0 "Knife Bayonet"
+localleadership        2
+drawsize            10   
+stationary
+
+newmonster          "Federal Garrison Cannon"
+copystats           "Cannon"
+spr1                "./sprites/placeholder.tga"
+spr2                "./sprites/placeholder.tga"
+descr "To entrench their position in this new world, feeral garrison cannons have been sent to garrison forts spread across Elysium."
+stationary
+
+newmonster          "Federal Patrol Commander"
+copystats           "Federal Garrison Commander"
+clearmove
+stupid
+aggressive
+wander              18
+
+newmonster          "Federal Patrol Cavalry"
+hp                  10
+armor               1
+mr                  4
+mor                 6
+str                 5
+rank                0
+human
+rangedweapon        0 "Krag-Jorgensen Rifle"
+meleeweapon         0 "Cavalry Saber"
+meleeweapon         4 "Hoof"
+fast
+drawsize			10
+nobootslots
+followstupid
+
+newmonster          "Federal Patrol Troop"
+copystats           "Federal Garrison Troop"
+clearmove
+followstupid
+
+newmonster          "Federal Patrol Grenadier" #?
+copystats           "Federal Garrison Grenadier"
+clearmove
+followstupid
+
+# EVENT UNITS (DLC)
+newmonster			"Epic Tumbleweed"
+
+newmonster			"Tumbleweed"
+
+newmonster			"Coyote"
+copystats			"Wolf"
+spr1                "./sprites/coyote1.tga"
+spr2                "./sprites/coyote2.tga"
+descr
+mor                 3
+meleeweapon         4 "Bite"
+drawsize		   -10
+
+newmonster          "Pinkerton"
+spr1                "./sprites/placeholder.tga"
+spr2                "./sprites/placeholder.tga"
+descr
+hp                  6
+armor               0
+mr                  4
+mor                 4
+str                 4
+rank                0
+human
+allitemslots
+rangedweapon        0 "Winchester Rifle"
+meleeweapon         0 "Baton"
+drawsize			10
+stealth
+
+#TODO: Pinkerton Commandant?
+
+# John Brown (berserker, shows up if there are slaves?)
+newmonster          "John Brown"
+descr ""
+spr1 "./sprites/placeholder.tga"
+hp                 10
+armor               0
+mr                  4
+mor                 7
+str                 5
+rank                0
+human
+#meleeweapon         8 "Colt Revolver"
+
+# ---------- Create the new Desperado player class ---------------
+
+newclass
+setclassname        "Desperado"
+addstartunits       "Cowboy" 6
+addstartunits       "Gunslinger" 2
+addstartunits       "Miner" 10
+
+setmaincom          "Desperado"
+addstartcom         "Sheriff"
+addstartcom         "Mayor"
+addstartcom         "Preacher"
+
+hometerr 563
+addstartterr 571
+
+likescoast -10
+likesnorth -8
+likessouth 8
+
+classdescr          "In the untamed wilds of the west, the Desperado had already become a legend of myth. Deciding he needed more adventure, he sought out the lost city of gold, El Dorado. While he never commented on finding it, he did say he found a map, one that led him to a new frontier, Elysium. Not long after he arrived, others managed to follow him and many pioneers began to flow into Elysium in search of fame and fortune. Now, Elysium is just as much their home as anyone else's as the Desperado continues to try and make a name for himself. ^^ Those that followed the Desperado seek to build up towns similar to the ones they came from, centering around rowdy Saloons and filled with everything a town could need ranging from a general store to a blacksmith. As their presence gets bigger in Elysium, the government will become interested in exploiting the land for all its worth, sending more support and weaponry as time progresses, even the most advanced tech they've got. ^^ The cowboys and gunslingers that followed the Desperado may lack in constitution and brains, but make up for it in raw firepower. Miners seeking gold can be a helpful frontline when taking the riches of the land. As time progresses, the government will lend some nastier firepower and perhaps the Desperado may even convince some other legends to join him in Elysium." 
+classabdescr          "Build up a town around a saloon with eight possible buildings each giving a different boost. ^ Units excel at range and can deal heavy damage, but quickly get overwhelmed in melee combat and have little natural defense against magic. ^ Can summon legendary units from real history, real myths, as well as new local legends from Elysium. ^ Able to eventually lay down railroads and get a heavily armored train to patrol the land."
+
+nostdtroops
+
+libbonusdescr "Every Library increases the chance of being able to recruit a local legend."
+
+# Basic Recruitment
+addunitrec  "Miner"                 100 8 40 0 0
+addunitrec  "Cowboy" 				100 4 50 0 5
+addunitrec  "Gunslinger"            20 4 55 0 5
+addunitrec  "Gambler"               30 4 50 0 0
+addunitrec  "Lumberjack"            100 6 50 0 0
+reclimiter	"+Lumber Yard Foreman"
+
+# Electric Mine Recruitment
+addunitrec  "Ruby Miner"            100 4 20 0 0
+recxcost	7	5
+recterr 			573
+addunitrec  "Saphire Miner"         100 4 20 0 0
+recxcost	8	5
+recterr 			573
+addunitrec  "Emerald Miner"         100 4 20 0 0
+recxcost	10	5
+recterr 			573
+addunitrec  "Diamond Miner"         100 4 20 0 0
+recxcost	9	5
+recterr 			573
+
+# Special Recruitment
+addmercrec  "Frontiersman"          20 6 60 0 5
+addmercrec  "Plains Cavalryman"     10 4 55 0 5
+addmercrec  "Sniper"                6 1 80 0 10
+addmercrec  "'Six-Fingered' Dirk"                		1 1 100 0 15
+reclimiter	"-'Six-Fingered' Dirk"
+libraryrec
+addmercrec  "Tomothy 'Huge Hat' Flemmings"             	1 1 100 0 15
+reclimiter	"-Tomothy 'Huge Hat' Flemmings"
+libraryrec
+addmercrec  "Jane 'Righteous Fury' McAdoo"             	1 1 100 0 15
+reclimiter	"-Jane 'Righteous Fury' McAdoo"
+libraryrec
+addmercrec  "'Rich Uncle' Milburn Pennybags"           	1 1 100 0 15
+reclimiter	"-'Rich Uncle' Milburn Pennybags"
+libraryrec
+
+# Commander Recruitment
+addcomrec	 "Mayor" 		        8 40 5 0
+addcomrec	 "Deputy" 		       10 25 10 5
+addcomrec    "Prospector"           8 35 10 5
+addcomrec    "Cavalry Troop Commander"           10 25 10 5
+
+# Chapel
+addcomrec	 "Preacher" 		    10 40 5 0
+recterr 			570
+templerec
+addcomrec	 "Circuit Rider" 		10 25 5 0
+recterr 			570
+templerec
+
+addunitrec  "Defender of the Divine"		100 5 45 0 5
+reclimiter	"+Divine Preacher"
+recterr 			570
+addunitrec  "Zealot of the Divine"			100 5 60 0 0
+reclimiter	"+Divine Preacher"
+recterr 			570
+
+addunitrec  "Corrupted Flagellant"			100 10 65 0 0
+reclimiter	"+Hellfire Preacher"
+recterr 			570
+addunitrec  "Hellfire Cultist"				100 5 60 0 0
+reclimiter	"+Hellfire Preacher"
+recterr 			570
+addunitrec  "Unholy Protege"				10 1 75 15 0
+reclimiter	"+Hellfire Preacher"
+recterr 			570
+
+# ---------- Events --------------
+# Generate Explorers at Explorer's Guild
+squareevent 
++player -2
++class -3 "Desperado"
++terrain 576
++chance 8
+newunits -3 "1*Explorer"
+endevent
+
+# Lumber yard destroys forests around it
+playerevent 
++class -2 "Desperado"
++ownsloctarg -2 575
++chance 50
+scatterloc 2
++terrain -6
+alterterrain 0
+addresources -2 0 15
+message -2 "Lumber sales are booming! And extra 15 gold has been added to your account."
+endevent
+
+# TODO: add an absurd death story made up each time the Desperado dies
+
+squareevent 
++player -2
++class -3 "Desperado"
++terrain 575
+-hasunithere -3 "Lumber Yard Foreman"
+newunits -3 "1*Lumber Yard Foreman"
+endevent
+
+# Unit renaming
+playerevent
++class -2 "Desperado"
++hasunit -2 "King of the Wild Frontier"
+comname "Davy Crockett"
+endevent
+
+playerevent
++class -2 "Desperado"
++hasunit -2 "Steel-Driving Man"
+comname "John Henry"
+endevent
+
+playerevent
++class -2 "Desperado"
++hasunit -2 "Greatest of All Cowboys"
+comname "Pecos Bill"
+endevent
+
+playerevent
++class -2 "Desperado"
++hasunit -2 "Heroine of the Plains"
+comname "Calamity Jane"
+endevent
+
+playerevent
++class -2 "Desperado"
++hasunit -2 "Champion Markswoman"
+comname "Annie Oakley"
+endevent
+
+playerevent
++class -2 "Desperado"
++hasunit -2 "Giant Lumberjack"
+comname "Paul Bunyan"
+endevent
+
+playerevent
++class -2 "Desperado"
++hasunit -2 "Blue Ox"
+comname "Babe"
+endevent
+
+squareevent
++player -2
++class -2 "Desperado"
++terrain 577
++chance 2
+newunits -2 "1*Federal Patrol Commander & 2d2*Federal Patrol Cavalry & 3d2*Federal Patrol Troop & 2d2*Federal Patrol Grenadier"
